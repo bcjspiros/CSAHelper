@@ -4,3 +4,6 @@
 # .env files contain sensitive data
 *.env
 
+# don't commit recipes csa helper agent generates
+*_recipe.txt
+*_recipe.md

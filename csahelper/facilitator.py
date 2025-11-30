@@ -6,11 +6,17 @@ from .agentconfig import retry_config
 from .cookbook import cookbook
 
 def output_recipe(recipe: str):
-    """Receive recipe output from Cookbook and outputs recipe to the user.
+    """Receive recipe output from Cookbook and save the recipe as a text file in the agent_generated_recipes folder
     Args:
           recipe (str): The returned text from a call to the Cookbook.
     """
-    print(f'\n{recipe}\n')
+    # Need to clean up the recipe name to get a valid filename
+    recipe_name = recipe.split('\n')[0].strip().lower()
+    recipe_name = recipe_name.replace("*","").replace(" ","_")
+
+    print(f'\n{recipe_name}\n')
+    with open(f'agent_generated_recipes/{recipe_name}_recipe.md', 'w') as recipe_file:
+        recipe_file.write(recipe)
 
 facilitator = LlmAgent(
     model=Gemini(model="gemini-2.5-flash-lite", retry_options=retry_config),
@@ -25,9 +31,9 @@ facilitator = LlmAgent(
     *   **Arugula Salad with Lemon Vinaigrette** A simple salad featuring fresh arugula.
         * Arugula
     
-    For each entry in the series perform the following steps:
-        1. Use the `Cookbook` agent to find a recipe for each entry in the series of meal suggestions.
-        2. Use the `output_recipe()` method to output the text returned by the Cookbook to the user.
+    For each entry in the series perform the following steps in order:
+        1. First, use the `Cookbook` agent to find a recipe for each entry in the series of meal suggestions.
+        2. Next, after receiving a recipe from the Cookbook, use the `output_recipe()` method to output the text to the user.
     """,
     tools=[output_recipe, AgentTool(agent=cookbook)],
 )
