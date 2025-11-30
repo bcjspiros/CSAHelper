@@ -4,6 +4,8 @@ from google.adk.models.google_llm import Gemini
 
 from .agentconfig import retry_config
 
+# TODO figure out why the agents don't handle arbitrary number of ingredients well
+# if the messages passed are in JSON format
 meal_planner = LlmAgent(
     model=Gemini(model="gemini-2.5-flash-lite", retry_options=retry_config),
     name="MealPlanner",
@@ -17,10 +19,17 @@ meal_planner = LlmAgent(
     And you could suggest home fries with red onions for the potatoes and red onions.
     
     You must return the meal name (MEAL_NAME), meal description (DESCRIPTION) and the ingredients (INGREDIENT) from the list used in that meal.
-    The output should be in this format:
-    *   **MEAL_NAME** DESCRIPTION
-        * INGREDIENT
-        * INGREDIENT (if exists)
+    The output should be in this format, including all special characters specified.
+    MEAL_NAME should be replaced with the meal's name.
+    DESCRIPTION should be replaced with the meal's description.
+    INGREDIENT should be replaced with the ingredient's name.
+    BEGIN and END are literal strings:
+--BEGIN--
+* MEAL_NAME
+* DESCRIPTION
+* INGREDIENT
+* INGREDIENT (if exists)
+--END--
     """,
     tools=[google_search],
     output_key="mealplan",

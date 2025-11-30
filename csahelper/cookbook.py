@@ -4,6 +4,8 @@ from google.adk.models.google_llm import Gemini
 
 from .agentconfig import retry_config
 
+# TODO figure out why the agents don't handle arbitrary number of ingredients well
+# if the messages passed are in JSON format
 cookbook = LlmAgent(
     model=Gemini(model="gemini-2.5-flash-lite", retry_options=retry_config),
     name="Cookbook",
@@ -13,15 +15,21 @@ cookbook = LlmAgent(
     The meal description will be referred to as DESCRIPTION below.
     Each ingredient will be referred to as INGREDIENT below.
     
-    The request format you will receive is:
-*   **MEAL_NAME** DESCRIPTION
-    * INGREDIENT
-    * INGREDIENT (if exists)
+    The request will have this format. BEGIN and END are literal strings:
+--BEGIN--
+* MEAL_NAME
+* DESCRIPTION
+* INGREDIENT
+* INGREDIENT (if exists)
+--END--
     
     For example:
-*   **Arugula Salad with Lemon Vinaigrette** A simple salad featuring fresh arugula.
-    * Arugula
-    
+--BEGIN--
+* Arugula Salad with Lemon Vinaigrette 
+* A simple salad featuring fresh arugula.
+* Arugula
+--END--
+
     You will return a recipe for the meal named and described. 
     The recipe must use each INGREDIENT.
     The recipe may use any other food ingredients.
