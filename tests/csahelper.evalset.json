@@ -1,0 +1,106 @@
+{
+  "eval_set_id": "csahelper",
+  "name": "csahelper",
+  "eval_cases": [
+    {
+      "eval_id": "test_tool_usage",
+      "conversation": [
+        {
+          "user_content": {
+            "parts": [
+              {
+                "text": "Please provide recipes for the following ingredients: potatoes and onions"
+              }
+            ]
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "The recipe for Roasted Potatoes and Onions has been generated and saved."
+              }
+            ]
+          },
+          "intermediate_data": {
+            "invocation_events": [
+              {
+                "author": "Facilitator",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-f7315526-3b63-4edc-9402-7028fa33f80c",
+                        "args": {
+                          "request": "Roasted Potatoes and Onions\nA simple side dish of diced potatoes and onions roasted until tender and slightly caramelized.\nIngredients: potatoes, onions"
+                        },
+                        "name": "Cookbook"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "Facilitator",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-f7315526-3b63-4edc-9402-7028fa33f80c",
+                        "name": "Cookbook",
+                        "response": {
+                          "result": "**Roasted Potatoes and Onions**  \nA simple side dish of diced potatoes and onions roasted until tender and slightly caramelized.\n\nIngredients:\n* 2 pounds potatoes, cut into 1-inch cubes\n* 1 large onion, cut into 1-inch chunks\n* 2 tablespoons olive oil\n* 1 teaspoon salt\n* 1/2 teaspoon black pepper\n* 1/2 teaspoon dried rosemary (optional)\n\nInstructions:\n1. Preheat oven to 400°F (200°C).\n2. In a large bowl, toss potatoes and onions with olive oil, salt, pepper, and rosemary (if using) until evenly coated.\n3. Spread the mixture in a single layer on a baking sheet.\n4. Roast for 35-45 minutes, or until potatoes are tender and browned, and onions are caramelized, flipping halfway through."
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "Facilitator",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-a8e0f55e-39e7-45a2-ab9b-c89527b80be6",
+                        "args": {
+                          "recipe": "**Roasted Potatoes and Onions**  \nA simple side dish of diced potatoes and onions roasted until tender and slightly caramelized.\n\nIngredients:\n* 2 pounds potatoes, cut into 1-inch cubes\n* 1 large onion, cut into 1-inch chunks\n* 2 tablespoons olive oil\n* 1 teaspoon salt\n* 1/2 teaspoon black pepper\n* 1/2 teaspoon dried rosemary (optional)\n\nInstructions:\n1. Preheat oven to 400°F (200°C).\n2. In a large bowl, toss potatoes and onions with olive oil, salt, pepper, and rosemary (if using) until evenly coated.\n3. Spread the mixture in a single layer on a baking sheet.\n4. Roast for 35-45 minutes, or until potatoes are tender and browned, and onions are caramelized, flipping halfway through."
+                        },
+                        "name": "output_recipe"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "Facilitator",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-a8e0f55e-39e7-45a2-ab9b-c89527b80be6",
+                        "name": "output_recipe",
+                        "response": {
+                          "result": null
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "csahelper",
+        "user_id": "user",
+        "state": {
+          "mealplan": ""
+        }
+      }
+    }
+  ]
+}
